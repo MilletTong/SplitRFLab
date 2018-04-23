@@ -41,7 +41,7 @@ end
  
 else
 
-[s.event s.phase s.evlat s.evlon s.evdep s.dis s.bazi s.rayp s.magnitude s.f0]=textread([Datapath '\' config.stnname '\' config.stnname 'finallist.dat'],'%s %s %f %f %f %f %f %f %f %f',-1);
+[s.event s.phase s.evlat s.evlon s.evdep s.dis s.bazi s.rayp s.magnitude s.f0]=textread(fullfile(Datapath, config.stnname, [config.stnname 'finallist.dat']),'%s %s %f %f %f %f %f %f %f %f',-1);
 %sort by rayp
 [rayp, idx]=sort(s.rayp);
 s.event=s.event(idx);
@@ -64,7 +64,7 @@ while 1
     break,end;
 filename=s.event(m,:);
 disp([char(filename) ' --s.event number: ' num2str(m)]);
-datafile=strcat([Datapath '\' config.stnname '\'],filename,'_',s.phase(m,:),'_R.dat');
+datafile=fullfile(Datapath, config.stnname, [filename '_' s.phase(m,:) '_R.dat']);
 datar(:,m)=load(char(datafile));
 m=m+1;
 end
